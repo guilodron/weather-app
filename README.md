@@ -1,4 +1,4 @@
-#Weather webapp
+# Weather webapp
 
 This project was created as a study of css animations on svg components.
 
