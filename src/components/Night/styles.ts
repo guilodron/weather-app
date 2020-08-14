@@ -1,15 +1,15 @@
 import styled, { keyframes } from 'styled-components';
 
-const animateTop = keyframes`
-  from{
-    visibility: hidden;
-    transform: translateY(-100%);
-  }
-  to{
-    visibility: visible;
-    transform: translateY(0%);
-  }
-`;
+// const animateTop = keyframes`
+//   from{
+//     visibility: hidden;
+//     transform: translateY(-100%);
+//   }
+//   to{
+//     visibility: visible;
+//     transform: translateY(0%);
+//   }
+// `;
 
 const animateBottom = keyframes`
   from{
