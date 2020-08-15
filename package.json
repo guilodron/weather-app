@@ -42,6 +42,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-autosuggest": "^9.3.14",
+    "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",

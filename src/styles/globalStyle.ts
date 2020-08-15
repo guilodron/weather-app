@@ -4,7 +4,7 @@ export default createGlobalStyle`
   *, body{
     margin: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: 'Montserrat', sans-serif;
   }
 `;

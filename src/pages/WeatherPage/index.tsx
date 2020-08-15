@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FiWind, FiCloudRain, FiSunrise, FiSunset } from 'react-icons/fi';
 import PuffLoader from 'react-spinners/PuffLoader';
+import { useParams } from 'react-router-dom';
 import Morning from '../../components/Morning';
 import Sunset from '../../components/Sunset';
 import Night from '../../components/Night';
@@ -18,14 +19,20 @@ interface WeatherData {
   current: string;
 }
 
+interface RouteParams {
+  cityName: string;
+  lat: string;
+  lon: string;
+}
+
 const WeatherPage: React.FC = () => {
   const apiKey = 'c5d95fa1925faa21dab808278d80ec19';
   const [weather, setWeather] = useState<WeatherData | null>(null);
-
+  const params = useParams<RouteParams>();
   useEffect(() => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=34.0194&lon=-118.411&
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${params.lat}&lon=${params.lon}&
     exclude=hourly,daily&appid=${apiKey}&units=metric`,
       )
       .then((response) =>
@@ -50,7 +57,7 @@ const WeatherPage: React.FC = () => {
           }).format(new Date(response.data.current.dt * 1000)),
         }),
       );
-  }, []);
+  }, [params]);
 
   return (
     <Container>
@@ -68,7 +75,7 @@ const WeatherPage: React.FC = () => {
           })()}
           <Temperature>
             <h1>{Math.floor(weather.temp)}° C</h1>
-            <span>Los Angeles</span>
+            <span>{params.cityName}</span>
           </Temperature>
           <WeatherInfo>
             <div>

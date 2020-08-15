@@ -1,13 +1,14 @@
 import React from 'react';
-import WeatherPage from './pages/WeatherPage';
+import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './styles/globalStyle';
+import Routes from './Routes';
 
 const App: React.FC = () => {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
-      <WeatherPage />
-    </>
+      <Routes />
+    </BrowserRouter>
   );
 };
 
