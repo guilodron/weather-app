@@ -82,7 +82,7 @@ const WeatherPage: React.FC = () => {
               <h2>
                 <FiCloudRain /> Umidade
               </h2>
-              <span>{weather.current}%</span>
+              <span>{weather.humidity}%</span>
               <h2>
                 <FiWind /> Vento
               </h2>
