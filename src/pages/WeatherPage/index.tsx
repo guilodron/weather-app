@@ -65,10 +65,10 @@ const WeatherPage: React.FC = () => {
         <>
           {(() => {
             const current = parseInt(weather.current, 10);
-            if (current > 6 && current < 16) {
+            if (current > 6 && current <= 15) {
               return <Morning />;
             }
-            if (current > 16 && current < 19) {
+            if (current >= 16 && current <= 19) {
               return <Sunset />;
             }
             return <Night />;
@@ -82,7 +82,7 @@ const WeatherPage: React.FC = () => {
               <h2>
                 <FiCloudRain /> Umidade
               </h2>
-              <span>{weather.humidity}%</span>
+              <span>{weather.current}%</span>
               <h2>
                 <FiWind /> Vento
               </h2>
