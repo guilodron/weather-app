@@ -1,14 +1,14 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import GlobalStyle from './styles/globalStyle';
 import Routes from './Routes';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <GlobalStyle />
       <Routes />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
