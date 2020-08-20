@@ -4,5 +4,12 @@
   "start_url": ".",
   "display": "standalone",
   "description": "A simple animated weather-app",
-  "background_color": "#00A2FF"
+  "background_color": "#00A2FF",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192 64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    }
+  ]
 }
