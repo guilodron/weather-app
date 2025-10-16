@@ -26,7 +26,7 @@ interface RouteParams {
 }
 
 const WeatherPage: React.FC = () => {
-  const apiKey = 'c5d95fa1925faa21dab808278d80ec19';
+  const apiKey = '79aee2862c7a3d326e94667d012c51be';
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const params = useParams<RouteParams>();
   useEffect(() => {
