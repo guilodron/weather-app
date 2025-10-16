@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FiWind, FiCloudRain, FiSunrise, FiSunset } from 'react-icons/fi';
 import PuffLoader from 'react-spinners/PuffLoader';
 import { useParams } from 'react-router-dom';
+import tzlookup from 'tz-lookup';
 import Morning from '../../components/Morning';
 import Sunset from '../../components/Sunset';
 import Night from '../../components/Night';
@@ -30,33 +31,44 @@ const WeatherPage: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const params = useParams<RouteParams>();
   useEffect(() => {
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${params.lat}&lon=${params.lon}&
-    exclude=hourly,daily&appid=${apiKey}&units=metric`,
-      )
-      .then((response) =>
+    const fetchWeather = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${params.cityName}&appid=${apiKey}&units=metric`,
+        );
+
+        // Get current time in the city's timezone
+        const timezone = tzlookup(
+          response.data.coord.lat,
+          response.data.coord.lon,
+        );
+        const timeOptions = {
+          hour: 'numeric',
+          minute: 'numeric',
+          timeZone: timezone,
+        } as const;
+
+        const currentTime = new Date().toLocaleTimeString('pt-BR', timeOptions);
+
         setWeather({
-          temp: response.data.current.temp,
-          humidity: response.data.current.humidity,
-          wind: response.data.current.wind_speed,
-          sunrise: Intl.DateTimeFormat('pt-BR', {
-            timeZone: response.data.timezone,
-            hour: 'numeric',
-            minute: 'numeric',
-          }).format(new Date(response.data.current.sunrise * 1000)),
-          sunset: Intl.DateTimeFormat('pt-BR', {
-            timeZone: response.data.timezone,
-            hour: 'numeric',
-            minute: 'numeric',
-          }).format(new Date(response.data.current.sunset * 1000)),
-          current: Intl.DateTimeFormat('pt-BR', {
-            timeZone: response.data.timezone,
-            hour: 'numeric',
-            minute: 'numeric',
-          }).format(new Date(response.data.current.dt * 1000)),
-        }),
-      );
+          temp: response.data.main.temp,
+          humidity: response.data.main.humidity,
+          wind: response.data.wind.speed,
+          sunrise: new Date(
+            response.data.sys.sunrise * 1000,
+          ).toLocaleTimeString('pt-BR', timeOptions),
+          sunset: new Date(response.data.sys.sunset * 1000).toLocaleTimeString(
+            'pt-BR',
+            timeOptions,
+          ),
+          current: currentTime,
+        });
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
+
+    fetchWeather();
   }, [params]);
 
   return (
